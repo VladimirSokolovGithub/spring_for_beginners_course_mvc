@@ -1,0 +1,24 @@
+*** Les_6_Аннотация @RequestParam ***
+
+На этом уроке рассмотрим другую технику для чтения данных из формы.
+
+Аннотация @RequestParam позволяет привязывать поле формы "employeeName" во view -ask-emp-details-view.jsp
+к параметру метода т.е. в классе MyController в методе showEmployeeDetails вместо параметра HttpServletRequest
+мы можем использовать другой параметр, который будет напрямую привязан к полю формы "employeeName".
+
+Теперь вместо параметра HttpServletRequest мы будем использовать параметр String empName и перед ним
+вставим аннотацию @RequestParam. В аннотации @RequestParam мы должны прописать поле формы - "employeeName"
+- public String showEmployeeDetails(@RequestParam("employeeName") String empName, Model model).
+
+Благодаря аннотации @RequestParam("employeeName") работа по изъятию значения формы "employeeName"
+происходит закулисами и мы просто можем сразу использовать параметр String empName, в который это имя
+помещается.
+
+Далее изменим show-emp-details-view.jsp уберем ${discription}, не будем его выводить так как убрали из метода.
+
+
+
+
+
+
+

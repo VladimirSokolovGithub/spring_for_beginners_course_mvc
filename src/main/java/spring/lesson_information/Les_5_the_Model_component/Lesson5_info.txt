@@ -1,0 +1,43 @@
+*** Les_5_Компонент Model ***
+
+Смотрим слайд №1
+
+Добавим в pom.xml ещё одну зависимость - JavaServlet(TM) Specification » 2.5
+
+<!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
+<dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>servlet-api</artifactId>
+    <version>2.5</version>
+    <scope>provided</scope>
+</dependency>
+
+Рассмотрим пример, получим из нашего view - ask-emp-details-view.jsp имя работника, поместим это имя
+в employeeName, затем в контроллере мы изменим имя, добавим к имени мистер или миссис и уже
+измененное имя добавим в модель.
+Во втором view - show-emp-details-view.jsp, которое отображает имя работника будем использовать
+модель и выводить в браузере уже измененное имя.
+
+Для этого в MyController мы должны изменить метод showEmployeeDetails(). Для того чтобы получить
+имя работника введенное и полученное нами во view -ask-emp-details-view.jsp мы добавим в
+параметр нашего метода HttpServletRequest. HttpServletRequest содержит много информации о
+http request(запросе), в том числе необходимую нам информацию. т.е. мы можем из него получить
+имя работника. Далее получаем из него имя работника (смотрим код метода) и используя второй параметр
+метода showEmployeeDetails() - Model, поместим имя нашего работника и приставку Mr. в модель
+model.addAttribute("nameAttribute", empName), где nameAttribute это название нашего нового
+атрибута, а empName его значение. Model - это контейнер для каких угодно данных.
+
+Далее для отображения нашего измененного имени, мы во втором view - show-emp-details-view.jsp
+пишем следующий код ${nameAttribute} указав в нём имя нашего атрибута из метода showEmployeeDetails()
+в классе MyController.
+
+В Model можно добавлять сколько угодно атрибутов, добавим ещё один атрибут в наш метод.
+
+Важно, второй параметр в методе addAttribute(), может быть не только String, но и Object
+поэтому можно передавать в него все что угодно.
+
+
+
+
+
+
