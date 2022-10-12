@@ -18,19 +18,19 @@ import javax.servlet.http.HttpServletRequest;
 //аннотации @RequestMapping("/"). В параметрах аннотации, в двойных ковычках мы пишем при каком адресе
 //должен сработать наш метод, и отобразить наш view, в нашем случае это слэш/.
 
-@Controller
-@RequestMapping("/employee")
+//@Controller
+//@RequestMapping("/employee")
 public class MyController {
 
-    @RequestMapping("/")
-    public String showFirstView() {
-        return "first-view";
-    }
-
-    @RequestMapping("/askDetails")
-    public String askEmployeeDetails() {
-        return "ask-emp-details-view";
-    }
+//    @RequestMapping("/")
+//    public String showFirstView() {
+//        return "first-view";
+//    }
+//
+//    @RequestMapping("/askDetails")
+//    public String askEmployeeDetails() {
+//        return "ask-emp-details-view";
+//    }
 
 
     //метод для урока Les_4
@@ -56,14 +56,14 @@ public class MyController {
 
     //метод для урока Les_6
 
-    @RequestMapping("/showDetails")
-    public String showEmployeeDetails(@RequestParam("employeeName") String empName, Model model) {
-
-        empName = "Mr. " + empName + "!";
-        model.addAttribute("nameAttribute", empName);
-
-        return "show-emp-details-view";
-    }
+//    @RequestMapping("/showDetails")
+//    public String showEmployeeDetails(@RequestParam("employeeName") String empName, Model model) {
+//
+//        empName = "Mr. " + empName + "!";
+//        model.addAttribute("nameAttribute", empName);
+//
+//        return "show-emp-details-view";
+//    }
 
 }
 
