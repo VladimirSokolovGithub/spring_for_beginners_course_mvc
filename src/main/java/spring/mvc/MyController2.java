@@ -5,7 +5,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
+//@Controller
+//@RequestMapping("/employee")
 public class MyController2 {
 
     @RequestMapping("/")

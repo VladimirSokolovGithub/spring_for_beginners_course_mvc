@@ -1,0 +1,28 @@
+*** Les_10_Spring MVC форма radiobutton  - переключатель ***
+
+Добавим в Employee поле private String carBrand, а так же геттеры и сеттеры для этого поля.
+Теперь в ask-emp-details-view2.jsp будем спрашивать у работника какую машину он хочет:
+
+Which car do you want?
+    BMW <form:radiobutton path="carBrand" value="BMW"/>
+    Audi <form:radiobutton path="carBrand" value="Audi"/>
+    MB <form:radiobutton path="carBrand" value="Mercedes-Benz"/>
+
+Теперь во втором view  - show-emp-details-view2.jsp нам нужно вывести всё это на экран:
+
+Your car: ${employee.carBrand}
+
+Если мы не хотим hard coded задавать значения машин в ask-emp-details-view2.jsp, мы
+можем создать в Employee Map - private Map <String, String> carBrands;
+Создадим для carBrands геттеры и сеттеры.
+Далее внутри конструктора Employee добавим следующие значения:
+
+carBrands = new HashMap<>();
+        carBrands.put("BMW", "BMW");
+        carBrands.put("Audi", "Audi");
+        carBrands.put("Mercedes-Benz", "MB");
+
+Теперь закомментируем код в ask-emp-details-view2.jsp и напишем следующее:
+
+<form:radiobuttons path="carBrand" items="${employee.carBrands}"/>
+

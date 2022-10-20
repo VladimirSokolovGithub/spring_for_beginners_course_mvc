@@ -1,0 +1,74 @@
+*** Les_12_Валидация данных_аннотации @Size, @NotEmpty, @NotBlank ***
+
+Для валидации мы будем использовать Java Standard Bean Validation API - это спецификация, которая описывает
+правила валидации.
+
+Hibernate Validator - это реализация правил, описанных в Java Standard Bean Validation API.
+Hibernate Validator это ещё одно направление в деятельности Hibernate это Валидация данных
+и оно не относиться к ORM и базам данных.
+
+Для того, что бы мы могли использовать Hibernate Validator, нам необходимо в pom.xml добавить
+еще одну зависимость
+
+<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-validator</artifactId>
+    <version>6.1.0.Final</version>
+</dependency>
+
+
+Далее для работы будут использоваться MyController3, ask-emp-details-view3.jsp, first-view3.jsp и
+show-emp-details-view3.jsp. Что бы всё работало корректно, нужно закомментировать аннотацию @RequestMapping("/")
+в классе MyController2.
+
+**************
+Аннотация @Size()
+
+В классе Employee добавим проверку минимальной длины имени в 2 символа и сообщение которое должно выходить
+если длина имени будет меньше 2-х символов.
+@Size(min = 2, message = "name must be min 2 symbols")
+Так же в этой аннотации можно задать и максимальную длину, например @Size(min = 2, max = 10)
+
+После написания аннотации, нам нужно изменить view ask-emp-details-view3, который запрашивает информацию
+об этом поле. Если валидация не будет проходить успешно, то мы должны отобразить это во view. Рядом
+с полем name должно появиться сообщение о неверном вводе. Поэтому во view ask-emp-details-view3
+после формы name, мы пишем ворму <form:errors path="name"/>.
+
+Далее меняем метод showEmployeeDetails3 в классе MyController3 и добавляем аннотацию @Valid, которая
+означает что наш атрибут employee будет подвергаться проверке
+public String showEmployeeDetails3(@Valid @ModelAttribute("employee") Employee emp).
+Метод будет показывать нам если данные введены корректно, то наш view show-emp-details-view3 и
+если некорректно, то отображать наш view ask-emp-details-view3 с описанием ошибки.
+Для этого в наше методе мы будем использовать второй параметр BindingResult:
+
+public String showEmployeeDetails3(@Valid @ModelAttribute("employee") Employee emp
+            , BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return "ask-emp-details-view3";
+        }
+        else {
+            return "show-emp-details-view3";
+        }
+    }
+Результат валидации атрибута employee будет помещен в BindingResult и с помощью него мы проверим
+прошла ли валидация успешно или нет с помощью if().
+Важно отметить, что параметр BindingResult bindingResult, должен идти сразу после атрибута нашей модели.
+
+*************
+Аннотация @NotEmpty()
+Аннотация @NotBlank()
+
+Приступим к аннотации @NotEmpty(message = "surname is required field") и сделаем поле surname - обязательным.
+Пропишем её над полем surname в классе Employee.
+
+Нам нужно изменить view ask-emp-details-view3 и после формы поля surname, добавить
+форму <form:errors path="surname"/>, показать что валидация проходит и для поля surname.
+
+Но есть важный момент, что аннотация @NotEmpty() не сможет корректно проверить поле если вместо символов
+ввести пробелы и в итоге отобразиться поле без фамилии - пустое поле. Если мы хотим этого избежать, то
+так же нужно использовать аннотацию @NotBlank(message = "surname is required field").
+
+
+

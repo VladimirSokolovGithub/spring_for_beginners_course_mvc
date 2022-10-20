@@ -1,0 +1,45 @@
+*** Les_14_Валидация данных_ создание собственной аннотации ***
+смотреть слайды с комментариями
+
+*********
+Добавим в класс Employee поле email, а так же геттеры и сеттеры к нему.
+
+В ask-emp-details-view3 добавим нашу форму:
+Email <form:input path="email"/>
+<form:errors path="email"/>
+
+В show-emp-details-view3 будем выводить email на экран
+Email: ${employee.email}
+
+*********
+Теперь к Email добавим бизнес логику, что все работники должны иметь email который заканчивается
+на xyz.com. Для этого мы напишем свою аннотацию так как могут быть ситуации, где регулярные
+выражения уже не помогут.
+
+Для написания своей валидации создадим свою аннотацию и обработчик нашей аннотации.
+
+В пакете mvc создадим package - validation и аннотацию CheckEmail
+Над нашей аннотацией кроме стандартных аннотаций
+@Target(ElementType.FIELD)
+@Retention(RetentionPolicy.RUNTIME)
+укажем аннотацию @Constraint(validatedBy = CheckEmailValidator.class), которая ссылается
+на класс CheckEmailValidator. Именно этот класс будет обрабатывать нашу аннотацию и именно
+в нем будет заключена вся бизнес логика аннотации CheckEmail
+
+public Class<?>[] groups() default {}; - позволяет разбивать аннотации по группам
+public Class<? extends Payload > [] payload() default {}; - используется для переноса
+информации о метаданных клиента.
+
+//00-11-50
+
+Классе CheckEmailValidator имплементирует ConstraintValidator<CheckEmail, String> в котором
+мы должны указать два дженерика. Первый - это сама аннотация CheckEmail и второй - это тип данных
+к которому мы будем применять аннотацию.
+Далее мы должны переопределить два метода ConstraintValidator потому что мы имплементируем
+этот интерфейс в CheckEmailValidator. (комментарии в классе CheckEmailValidator).
+
+
+
+
+
+

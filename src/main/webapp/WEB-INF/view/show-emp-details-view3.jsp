@@ -27,7 +27,10 @@ Language(s):
 
     </c:forEach>
 </ul>
-
+<br>
+Phone numper: ${employee.phoneNumber}
+<br>
+Email: ${employee.email}
 </body>
 
 </html>

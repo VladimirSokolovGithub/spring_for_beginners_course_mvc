@@ -1,0 +1,44 @@
+*** Les_9_Spring MVC форма select ***
+
+Продолжаем рассматривать формы Spring MVC.
+На этом уроке поговорим о выпадающем списке (drop down list).
+Мы добавим в наш view информацию о департаменте, который можно выбрать из выпадающего списка.
+За выпадающий список отвечает форма form:select.
+
+Добавим во view - ask-emp-details-view2.jsp форму - form:select
+Между открытием и закрытием тега <form:select path="department"> </form:select> мы должны
+прописать разные опции, который должен уметь выбрать работник, при выборе своего департамента.
+
+Во втором view который отображает информацию - show-emp-details-view2.jsp
+укажем Your department: ${employee.department}
+
+Если мы не хотим hard coded задавать значения департаментам в ask-emp-details-view2.jsp
+Department <form:select path="department">
+    <form:option value="Information Technology" label="IT"/>
+    <form:option value="Human Resources" label="HR"/>
+    <form:option value="Sales" label="Sales"/>
+    </form:select>
+
+то мы можем создать в Employee Map - private Map <String, String> departments;
+Создадим для departments геттеры и сеттеры.
+Далее внутри конструктора Employee добавим следующие значения:
+ public Employee() {
+        departments = new HashMap<>();
+        departments.put("IT", "Information Technology");
+        departments.put("HR", "Human Resources");
+        departments.put("Sales", "Sales");
+    }
+Код в ask-emp-details-view2.jsp внутри формы select закомментируем и напишем следующее:
+<form:options items="${employee.departments}"/>, что означает выбор элементов из нашей
+коллекции. При отображении view будет срабатывать метод getDepartments, чтобы мы
+увидели все значения из HashMap.
+
+
+
+
+
+
+
+
+
+
