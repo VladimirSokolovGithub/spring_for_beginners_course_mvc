@@ -3,8 +3,7 @@ package spring.mvc;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -25,7 +24,15 @@ public class MyController3 {
         return "ask-emp-details-view3";
     }
 
-    @RequestMapping("/showDetails3")
+//    @RequestMapping(path = "/showDetails3", method = RequestMethod.GET)
+
+    //Вместо аннотации @RequestMapping мы можем использовать аннотацию @GetMapping,
+    //которая делает всё тоже самое, но ограничена уже HTTP методом "get".
+//    @GetMapping("/showDetails3")
+
+    //Если мы хотим использовать метод "post", то мы должны пользоваться
+    //аннотацией @PostMapping, которая предназначена для HTTP метода "post"
+    @PostMapping("/showDetails3")
     public String showEmployeeDetails3(@Valid @ModelAttribute("employee") Employee emp
             , BindingResult bindingResult) {
 

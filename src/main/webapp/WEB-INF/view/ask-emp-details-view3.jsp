@@ -9,7 +9,8 @@
 <br>
 <br>
 
-<form:form action="showDetails3" modelAttribute="employee">
+<%--<form:form action="showDetails3" modelAttribute="employee" method="get">--%>
+<form:form action="showDetails3" modelAttribute="employee" method="post">
 
     Name <form:input path="name"/>
     <form:errors path="name"/>
